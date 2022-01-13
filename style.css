@@ -1,14 +1,17 @@
-*{
-    margin: 0;
-    padding: 0;
-    background-color: darkslategrey;
+* {
+  margin: 0;
+  padding: 0;
+  background-color: darkslategrey;
 }
 
-.container{
-    display: flex;
+.container {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    position: absolute;
+    background-color: white;
 }
-
-.square-div{
-    transition: .3s;
-    cursor: pointer;
+.square-div {
+  transition: 0.3s;
+  cursor: pointer;
 }

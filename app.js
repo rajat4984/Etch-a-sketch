@@ -1,30 +1,40 @@
-let container = document.querySelector(".container");
-let i = 0;
+let defaultNUmber = 16;
+const container = document.querySelector(".container");
+const resetButton = document.querySelector(".reset-button");
 
-function handleDivHover(e) {
-    console.log(e.target)
-    e.target.style.backgroundColor = "red";
-}
+resetButton.addEventListener('click',handleReset)
 
-const createGrid = () => {
-  let i = 0;
-  let divContainer = document.createElement("div");
-  divContainer.classList.add("div-container");
-  while (i < 16) {
-    let squareDivs = document.createElement("div");
-    squareDivs.classList.add("square-div");
-    squareDivs.style.width = "20px";
-    squareDivs.style.height = "20px";
-    squareDivs.style.backgroundColor = "white";
-    squareDivs.style.border = "1px solid black";
-    squareDivs.addEventListener("mouseover", handleDivHover);
-    divContainer.appendChild(squareDivs);
-    container.appendChild(divContainer);
-    i++;
+
+const createGrid = (number) => {
+  let area = number * number;
+  for (let i = 1; i <= area; i++) {
+    let divSquare = document.createElement("div");
+    container.style.gridTemplateColumns = `repeat(${number},1fr)`;
+    container.style.gridTemplateRows = `repeat(${number},1fr)`;
+    divSquare.style.backgroundColor = "white";
+    divSquare.style.border = "1px black solid";
+    container.insertAdjacentElement("beforeend", divSquare);
   }
+  let pixels = container.querySelectorAll("div");
+  pixels.forEach((pixel) => {
+    pixel.addEventListener("mouseover", handleHover);
+  });
 };
 
-while (i < 16) {
-  createGrid();
-  i++;
-}
+
+
+
+function handleHover(e){
+  e.target.style.backgroundColor = "red";
+};
+
+function handleReset(){
+  let pixels = container.querySelectorAll("div");
+  let userNumber = prompt("Number of squares you want")
+  pixels.forEach((pixel) =>{
+    pixel.remove();
+  })
+  createGrid(userNumber)
+};
+
+createGrid(defaultNUmber);
