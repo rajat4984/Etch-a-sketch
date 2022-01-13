@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: darkslategrey;
+}
+
+.container{
+    display: flex;
+}
+
+.square-div{
+    transition: .3s;
+    cursor: pointer;
+}
