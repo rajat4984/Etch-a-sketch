@@ -17,6 +17,12 @@ body {
   transform: translate(-50%,-50%);
 }
 
+.heading{
+  color: #efefef;
+  font-size: 2rem;
+  margin: 0em .5em .5em .5em;
+}
+
 .buttons,.container-wrapper,.heading{
   display: flex;
   justify-content: center;
@@ -36,13 +42,6 @@ body {
 .buttons > button:hover,input:hover{
   opacity: .4;
 }
-
-.heading{
-  color: #efefef;
-  font-size: 2rem;
-  margin: 0em .5em .5em .5em;
-}
-
 
 
 .container {

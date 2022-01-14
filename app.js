@@ -9,13 +9,14 @@ const pixelRange = document.querySelector('.pixel-range')
 
 
 
-console.log(pixelRange.value);
 //EVENTS LISTERNER
 resetButton.addEventListener("click", handleReset);
 colorSelector.addEventListener("change", handleColor);
 eraserButton.addEventListener("click",handleEraser)
 pixelRange.addEventListener("change",handlPixelRange);
 
+
+//FUNCTIONS
 const createGrid = (number) => {
   let area = number * number;
   for (let i = 1; i <= area; i++) {
@@ -23,10 +24,12 @@ const createGrid = (number) => {
     container.style.gridTemplateColumns = `repeat(${number},1fr)`;
     container.style.gridTemplateRows = `repeat(${number},1fr)`;
     divSquare.style.backgroundColor = defaultBackgroundColor;
+    divSquare.style.transition = ".3s"
     container.insertAdjacentElement("beforeend", divSquare);
   }
   pixelMaker(defaultColor);
 };
+
 
 function pixelMaker(color) {
   let pixels = container.querySelectorAll("div");
@@ -34,6 +37,7 @@ function pixelMaker(color) {
     pixel.addEventListener("mouseover", handleHover(color));
   });
 }
+
 
 function removePixels(){
   let pixels = container.querySelectorAll("div");
