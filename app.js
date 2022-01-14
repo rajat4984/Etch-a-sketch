@@ -1,9 +1,20 @@
 let defaultNUmber = 16;
+var defaultColor = "black";
+let defaultBackgroundColor = "#121212"
 const container = document.querySelector(".container");
 const resetButton = document.querySelector(".reset-button");
+const colorSelector = document.querySelector(".color-selector");
+const eraserButton = document.querySelector(".eraser-button");
+const pixelRange = document.querySelector('.pixel-range')
 
-resetButton.addEventListener('click',handleReset)
 
+
+console.log(pixelRange.value);
+//EVENTS LISTERNER
+resetButton.addEventListener("click", handleReset);
+colorSelector.addEventListener("change", handleColor);
+eraserButton.addEventListener("click",handleEraser)
+pixelRange.addEventListener("change",handlPixelRange);
 
 const createGrid = (number) => {
   let area = number * number;
@@ -11,30 +22,56 @@ const createGrid = (number) => {
     let divSquare = document.createElement("div");
     container.style.gridTemplateColumns = `repeat(${number},1fr)`;
     container.style.gridTemplateRows = `repeat(${number},1fr)`;
-    divSquare.style.backgroundColor = "white";
-    divSquare.style.border = "1px black solid";
+    divSquare.style.backgroundColor = defaultBackgroundColor;
     container.insertAdjacentElement("beforeend", divSquare);
   }
+  pixelMaker(defaultColor);
+};
+
+function pixelMaker(color) {
   let pixels = container.querySelectorAll("div");
   pixels.forEach((pixel) => {
-    pixel.addEventListener("mouseover", handleHover);
+    pixel.addEventListener("mouseover", handleHover(color));
   });
-};
+}
 
-
-
-
-function handleHover(e){
-  e.target.style.backgroundColor = "red";
-};
-
-function handleReset(){
+function removePixels(){
   let pixels = container.querySelectorAll("div");
-  let userNumber = prompt("Number of squares you want")
-  pixels.forEach((pixel) =>{
+  pixels.forEach((pixel) => {
     pixel.remove();
-  })
-  createGrid(userNumber)
+  });
+}
+
+//EVENT LISTENER FUNCTIONS
+function handleReset() {
+  removePixels()
+  createGrid(pixelRange.value)
+}
+
+const handleHover = (color) => {
+  return (e) => {
+    e.target.style.backgroundColor = color;
+  };
 };
 
+function handleColor(e) {
+  defaultColor = e.target.value;
+  pixelMaker(defaultColor);
+}
+
+function handleEraser(){
+  console.log("hello")
+  let eraserColor = defaultBackgroundColor;
+  pixelMaker(eraserColor)
+
+}
+
+function handlPixelRange(e){
+  pixelMaker(defaultColor)
+  removePixels()
+  createGrid(e.target.value);
+}
+
+
+//DEFAULT LAYOUT
 createGrid(defaultNUmber);
