@@ -61,7 +61,6 @@ function handleColor(e) {
 }
 
 function handleEraser() {
-  console.log("hello");
   let eraserColor = defaultBackgroundColor;
   pixelMaker(eraserColor);
 }
